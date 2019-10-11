@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Marburgh.exe" size="112640">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Marburgh.exe" size="114688">
       <assemblyIdentity name="Marburgh" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>mxE0EGkB6qRay89IWwk98RBCjCieRacQ4Nx7MaQsaSI=</dsig:DigestValue>
+        <dsig:DigestValue>/XNteKqVFvjbix528SsdPKNR4g6Xvm8Rx3DBDHYINdQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -42,8 +42,20 @@ public class House
         else if (choice == "b")
         {
             Console.Clear();
-            Console.WriteLine("You sleep until morning.");
-            Time.DayChange(1, p);
+            Utilities.EmbedColourText(Colour.HEALTH,Colour.ENERGY,Colour.TIME,"Would you like to sleep until morning?\nYour ","Health ","and ","Energy ","will be restored to maximum and ","time ","will advance by one day\n\n[Y]es       [N]o\n\n");
+            string choice1 = Console.ReadKey(true).KeyChar.ToString().ToLower();
+            if (choice1 == "y")
+            {
+                Console.Clear();
+                Console.WriteLine("You sleep until morning. You wake up feeling refreshed");
+                Utilities.EmbedColourText(Colour.HEALTH, "Health at ", "maximum", "");
+                Utilities.EmbedColourText(Colour.ENERGY, "Energy at ", "maximum", "");
+                if (p.potions < 1) Utilities.EmbedColourText(Colour.HEALTH, "You gain ", "1", "potion");
+                Console.WriteLine("You can explore again");
+                Utilities.Keypress();
+                Time.DayChange(1, p);
+            }
+            else YourHouse(p);            
         }
         //If you hit c and it's available, you get to choose how to craft
         if (choice == "1" && p.craft == true) Craft(p);        
@@ -73,7 +85,8 @@ public class House
 
     private static void BossWeapon(Creature p)
     {
-        
+        Console.WriteLine("You do not have any boss drops that can make weapons");
+        Utilities.Keypress();
     }
 
     public static void Enhancement(Creature p)

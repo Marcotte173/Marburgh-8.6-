@@ -13,7 +13,7 @@
 
     public static Boss[] BossList = new Boss[]
     {
-        new Boss("Savage Orc", "The Savage Orc lies dead at your feet. Your village is safe for now.\nBe wary tho, there are still more dangers on the horizon...", pClass.MonsterClassList[3], 35, 130, 5, 3, 80,10,8, Drop.BossDrop[0], 70,100,100, true),
+        new Boss("Savage Orc", "The Savage Orc lies dead at your feet. Your village is safe for now.\nBe wary tho, there are still more dangers on the horizon...", pClass.MonsterClassList[3], 35, 130, 6, 1, 80,10,8, Drop.BossDrop[0], 70,100,100, true),
         new Boss("Ettin", "The Savage Orc lies dead at your feet. Your village is safe for now.\nBe wary tho, there are still more dangers on the horizon...", pClass.MonsterClassList[3], 35, 130, 0, 0, 84, 15, 12, Drop.BossDrop[1], 70,100,100, true)
     };
 

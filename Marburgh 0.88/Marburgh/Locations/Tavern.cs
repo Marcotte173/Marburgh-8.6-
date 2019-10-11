@@ -27,13 +27,15 @@ public class Tavern
             if (Dungeon.DungeonInfo[0].boss.IsAlive)
             {
                 Console.WriteLine("One of the townsfolk approaches, while the others regard you, gratitude in their eyes.");
-                Utilities.ColourText(Colour.SPEAK, $"\n'Thank you so much {p.family.FirstName} for rescuing us!\nWe were sure we were going to die in there.\nIf only that horrible Orc was dead we would be able to start rebuilding our village'");
+                if (p.family.FirstName == RandomEvent.RescueName) Utilities.ColourText(Colour.SPEAK, $"\n'Thank you so much {p.family.FirstName} for rescuing us!\nWe were sure we were going to die in there.\nIf only that horrible Orc was dead we would be able to start rebuilding our village'");
+                else Utilities.ColourText(Colour.SPEAK, $"\n'We are so sorry for your loss, {p.family.FirstName}. \nWe know {RandomEvent.RescueName} was family, and saving us from that Orc is a debt we'll never be able to repay.\nWe'll certainly try tho, once that Orc and his army are gone and we can rebuild'");
                 Utilities.Keypress();
             }
             else
             {
                 Console.WriteLine("The townspeople thank you, one by one, relief on all of their faces.\nThe last person to thank you, the mayor of the town pulls you aside a moment");
-                Utilities.ColourText(Colour.SPEAK, $"\n'Thank the gods you were able to save us all.\nWe will start rebuilding immediately.\nIn time, our town will be as strong and prosperous as it ever was.\nI am worried tho. I believe that this was only the beginning\nThere are monsters and terrors out there eager to stake a claim on our land'");
+                if (p.family.FirstName == RandomEvent.RescueName) Utilities.ColourText(Colour.SPEAK, $"\n'Thank the gods you were able to save us all.\nWe will start rebuilding immediately.\nIn time, our town will be as strong and prosperous as it ever was.\nI am worried tho. I believe that this was only the beginning\nThere are monsters and terrors out there eager to stake a claim on our land'");
+                else Utilities.ColourText(Colour.SPEAK, $"\n'Thank you so much for saving us all. We owe everything to you and your family, especially {RandomEvent.RescueName}\nWe will start rebuilding immediately.\nIn time, our town will be as strong and prosperous as it ever was.\nI am worried tho. I believe that this was only the beginning\nThere are monsters and terrors out there eager to stake a claim on our land'");
                 Utilities.Keypress();
                 Console.Clear();
                 Console.WriteLine("The town is rebuilding\nPeople are going back to work!\nThe weapon shop has opened!\nThe armor shop has opened!\nShops are getting more supplies!\nConstruction on the bank has begun!");

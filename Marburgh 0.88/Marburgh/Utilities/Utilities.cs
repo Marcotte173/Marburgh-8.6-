@@ -126,6 +126,10 @@ public class Utilities
             {
                 if (Marburgh.Program.d.shell[i].assignedRoom == Marburgh.Program.d.randomRoomOptions[x]) reset = false;
             }
+            for (int n = 0; n < Marburgh.Program.d.staticRoomOptions.Length; n++)
+            {
+                if(Marburgh.Program.d.shell[i].assignedRoom == Marburgh.Program.d.staticRoomOptions[n]) reset = false;
+            }
             if (reset == true) Marburgh.Program.d.shell[i].encountered = false;
         }
     }
@@ -285,8 +289,7 @@ public class Utilities
     {
         p.health = p.maxHealth;
         p.energy = p.maxEnergy;
-        Explore.canExplore = true;        
-        //Data.Save(p);
+        Explore.canExplore = true;  
     }
 
     public static void Quit()

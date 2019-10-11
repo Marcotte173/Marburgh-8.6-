@@ -134,7 +134,7 @@ class Explore
     {
         if (p.xp >= LevelMaster.xpRequired[p.level]) Utilities.ColourText(Colour.XP, "YOU ARE ELIGIBLE FOR A LEVEL RAISE");
         //Navigation Display
-        Console.SetCursorPosition(0, 20);
+        Console.SetCursorPosition(0, 18);
         //If North is an option
         if (currentShell.North > 0)
         {

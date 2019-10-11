@@ -7,6 +7,7 @@ using System.Threading;
 
 public class RandomEvent
 {
+    public static string RescueName = "";
     public static bool desecrated;
     public static void Event1(Dungeon d, Creature p, Event e)
     {
@@ -15,6 +16,7 @@ public class RandomEvent
                 "\nUntie us and we will reward you handomely when we get back!'\n\n" + Colour.RESET + "You untie them and point the way out.\n" +
                 "Be sure to meet them in the tavern afterwards to claim your reward.\n\nThat is.... if you live");
         Event.TFRescued = true;
+        RescueName = Family.FamilyNames[0];
         Explore.currentShell.encountered = true;
         Utilities.Keypress();
         Explore.GameDungeon(d, p);
