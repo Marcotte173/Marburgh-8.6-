@@ -77,21 +77,30 @@ public class Utilities
         Console.WriteLine(string.Format("{0," + ((Console.WindowWidth / 4) + (text.Length / 2)) + "}{1," + ((Console.WindowWidth / 4) + (text2.Length / 2) - (text.Length / 2)) + "}" +
             "{2," + ((Console.WindowWidth / 4) + (text3.Length / 2) - (text2.Length / 2)) + "}", text, text2, text3));
     }
+    public static void CenterColourText(string colour, string text, string text2, string text3)
+    {
+        Console.WriteLine(string.Format("{0," + ((Console.WindowWidth / 2) + ((text.Length + text2.Length + text3.Length) / 2) + ((colour.Length + Colour.RESET.Length))) + "}", $"{text}{colour}{text2}{Colour.RESET}{text3}"));
+    }
+
+    public static void CenterColourText(string colour, string colour2, string text, string text2, string text3, string text4, string text5 )
+    {
+        Console.WriteLine(string.Format("{0," + ((Console.WindowWidth / 2) + ((text.Length + text2.Length + text3.Length + text4.Length + text5.Length) / 2) + ((colour.Length + colour2.Length + Colour.RESET.Length*2))) + "}", text+colour+text2+Colour.RESET+text3+colour2+text4+Colour.RESET+text5));
+    }
 
     public static void CombatText(string colour, string text)
     {
-        Console.WriteLine(string.Format("{0," + ((Console.WindowWidth / 2) + (text.Length / 2) + (colour.Length/2)) + "}", colour + text));
+        Console.WriteLine(string.Format("{0," + ((Console.WindowWidth / 2) + (text.Length / 2) + (colour.Length)) + "}", colour + text));
     }
 
     public static void CombatText(string colour, string colour2, string text, string text2)
     {
-        Console.WriteLine(string.Format("{0," + ((Console.WindowWidth / 3) + (text.Length / 2) + (colour.Length / 2)) + "}{1," + ((Console.WindowWidth / 3) + (text2.Length / 2) - (text.Length / 2) + (colour2.Length / 2)) + "}", colour + text, colour2 + text2));
+        Console.WriteLine(string.Format("{0," + ((Console.WindowWidth / 3) + (text.Length / 2) + (colour.Length)) + "}{1," + ((Console.WindowWidth / 3) + (text2.Length / 2) - (text.Length / 2) + (colour2.Length )) + "}", colour + text, colour2 + text2));
     }
 
     public static void CombatText(string colour, string colour2, string colour3, string text, string text2, string text3)
     {
-        Console.WriteLine(string.Format("{0," + ((Console.WindowWidth / 4) + (text.Length / 2) + (colour.Length / 2)) + "}{1," + ((Console.WindowWidth / 4) + (text2.Length / 2) - (text.Length / 2) + (colour2.Length / 2)) + "}" +
-            "{2," + ((Console.WindowWidth / 4) + (text3.Length / 2) - (text2.Length / 2) + (colour3.Length / 2)) + "}", colour + text, colour2 + text2, colour3 + text3));
+        Console.WriteLine(string.Format("{0," + ((Console.WindowWidth / 4) + (text.Length / 2) + (colour.Length )) + "}{1," + ((Console.WindowWidth / 4) + (text2.Length / 2) - (text.Length / 2) + (colour2.Length)) + "}" +
+            "{2," + ((Console.WindowWidth / 4) + (text3.Length / 2) - (text2.Length / 2) + (colour3.Length)) + "}", colour + text, colour2 + text2, colour3 + text3));
     }
 
     public static void Death()
@@ -115,24 +124,7 @@ public class Utilities
         Marburgh.Program.d.shell[1].current = true;
         Explore.canExplore = true;
         Create.Character();
-    }    
-
-    public static void ResetNormalRooms()
-    {
-        for (int i = 2; i < Marburgh.Program.d.shell.Length; i++)
-        {
-            bool reset = true;
-            for (int x = 0; x < Marburgh.Program.d.randomRoomOptions.Length; x++)
-            {
-                if (Marburgh.Program.d.shell[i].assignedRoom == Marburgh.Program.d.randomRoomOptions[x]) reset = false;
-            }
-            for (int n = 0; n < Marburgh.Program.d.staticRoomOptions.Length; n++)
-            {
-                if(Marburgh.Program.d.shell[i].assignedRoom == Marburgh.Program.d.staticRoomOptions[n]) reset = false;
-            }
-            if (reset == true) Marburgh.Program.d.shell[i].encountered = false;
-        }
-    }
+    }        
 
     public static void DotDotDot()
     {
@@ -155,9 +147,7 @@ public class Utilities
         Thread.Sleep(300);
         Console.Write(".");
         Thread.Sleep(300);
-    }
-
-    
+    }    
 
     public static void ColourText(string colour, string text)
     {
@@ -290,6 +280,23 @@ public class Utilities
         p.health = p.maxHealth;
         p.energy = p.maxEnergy;
         Explore.canExplore = true;  
+    }
+
+    public static void ResetNormalRooms()
+    {
+        for (int i = 2; i < Marburgh.Program.d.shell.Length; i++)
+        {
+            bool reset = true;
+            for (int x = 0; x < Marburgh.Program.d.randomRoomOptions.Length; x++)
+            {
+                if (Marburgh.Program.d.shell[i].assignedRoom == Marburgh.Program.d.randomRoomOptions[x]) reset = false;
+            }
+            for (int n = 0; n < Marburgh.Program.d.staticRoomOptions.Length; n++)
+            {
+                if (Marburgh.Program.d.shell[i].assignedRoom == Marburgh.Program.d.staticRoomOptions[n]) reset = false;
+            }
+            if (reset == true) Marburgh.Program.d.shell[i].encountered = false;
+        }
     }
 
     public static void Quit()

@@ -28,31 +28,22 @@ public class House
     public static void YourHouse(Creature p)
     {
         Console.Clear();
-        Utilities.ColourText(Colour.SPEAK, "You are in your house. It's not big, but it's clean and cozy. In the corner you see your bed.");
-        if (p.craft == true) Utilities.EmbedColourText(Colour.SPEAK, Colour.RAREDROP, Colour.SPEAK, "\n", "In the center of the main room you have set up your ", "", "crafting machine", "", ". \nNow you just have to figure out how it works", "");
-        Utilities.ColourText(Colour.HEALTH, "\n\n[B]");
-        Console.Write("ed");
-        //If the crafting machine is available, you see it
-        if (p.craft == true) Utilities.EmbedColourText(Colour.RAREDROP, "                  [1]","Crafting machine","");
-        Console.WriteLine("\n[C]haracter            [R]eturn to town\n");
-        Utilities.EmbedColourText(Colour.TIME, Colour.TIME, Colour.TIME, Colour.TIME, "It is day ", $"{Time.day}", ", the ", $"{Time.weeks[Time.week]}", " week of ", $"{Time.months[Time.month]}", ", ", $"{Time.year}", "\n\n");
-        Console.WriteLine("\n\nWhat would you like to do?\n\n");
+        string craftOption = (p.craft == true) ? "Crafting Machine" : "" ;
+        string craftButton = (p.craft == true) ? Colour.ENHANCEMENT + "1" + Colour.RESET : "";
+        if (p.craft == false) UI.General(new int[] { 1, 0, 0 }, new string[] { Colour.SPEAK, "", "You are in your house. It's not big, but it's clean and cozy. In the corner you see your bed.", "", "", "" }, new string[] { "leep", "", craftOption }, null, new string[] { Colour.TIME + "S" + Colour.RESET, "", craftButton }, null);
+        else UI.General(new int[] { 1, 1, 0 }, new string[] { Colour.SPEAK, "","You are in your house. It's not big, but it's clean and cozy. In the corner you see your bed.","", Colour.ENHANCEMENT, "In the center of the room you see your ", "crafting machine","","Now you just have to figure out how it works" }, new string[] { "leep", "", craftOption }, null, new string[] { Colour.TIME + "S" + Colour.RESET, "", craftButton }, null);
         string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();
         if (choice == "r") Marburgh.Program.GameTown();
-        else if (choice == "b")
+        else if (choice == "s")
         {
             Console.Clear();
-            Utilities.EmbedColourText(Colour.HEALTH,Colour.ENERGY,Colour.TIME,"Would you like to sleep until morning?\nYour ","Health ","and ","Energy ","will be restored to maximum and ","time ","will advance by one day\n\n[Y]es       [N]o\n\n");
+            UI.General(new int[] { 0, 2, 1, 0, 0},new string[] { "Would you like to sleep until morning?",Colour.HEALTH,Colour.ENERGY,"Your ", "Health " ,"and " ,"Energy " , "will be restored to maximum", Colour.TIME, "Time will advance by ","one ","day","", "[Y]es       [N]o" }, new string[] { "leep", "", craftOption }, null, new string[] { Colour.TIME + "S" + Colour.RESET, "", craftButton }, null);
             string choice1 = Console.ReadKey(true).KeyChar.ToString().ToLower();
             if (choice1 == "y")
             {
                 Console.Clear();
-                Console.WriteLine("You sleep until morning. You wake up feeling refreshed");
-                Utilities.EmbedColourText(Colour.HEALTH, "Health at ", "maximum", "");
-                Utilities.EmbedColourText(Colour.ENERGY, "Energy at ", "maximum", "");
-                if (p.potions < 1) Utilities.EmbedColourText(Colour.HEALTH, "You gain ", "1", "potion");
-                Console.WriteLine("You can explore again");
-                Utilities.Keypress();
+                UI.General(new int[] { 0, 1, 1, 1, 0, 0 },new string[] { "You sleep until morning", Colour.HEALTH, "", "Health " , "at Maximum ", Colour.ENERGY , "", "Energy " ,  "at maximum", Colour.HEALTH, "You gain " , "1 " , "potion", "You can explore again", "Press any key to continue" }, new string[] { "leep", "", craftOption }, null, new string[] { Colour.TIME + "S" + Colour.RESET, "", craftButton }, null);
+                Console.ReadKey(true);
                 Time.DayChange(1, p);
             }
             else YourHouse(p);            

@@ -7,6 +7,10 @@ public class Shop
     public string shopkeepName;
     public string shopkeepRace;
     public string shopkeepGreeting;
+    public static List<string> itemShopOptionButton1 = new List<string> {Colour.HEALTH + "P" + Colour.RESET, "" };
+    public static List<string> itemShopOptionList1 = new List<string> {"otions", "" };
+    public static List<string> itemShopOptionButton2 = new List<string> {Colour.ITEM  + "B" + Colour.RESET,Colour.ITEM + "S" + Colour.RESET };
+    public static List<string> itemShopOptionList2 = new List<string> {"uy","ell" };
     public Equipment[] ItemList;
     public static Equipment[] WeaponList = new Equipment[] 
     {
@@ -159,19 +163,30 @@ public class Shop
     public static void ItemShop(Creature p)
     {
         Console.Clear();
-        Utilities.EmbedColourText(Colour.NAME, Colour.CLASS, "You enter a cluttered shop. There are bubbling potions everywhere.", "\n\nElya", " the ", "elf ", "looks at you and smiles.\n");
-        if (Marburgh.Program.tutorial == false) Utilities.ColourText(Colour.SPEAK, "'Well, hello there. Are you here to buy something? \nThere's not much in town, i'm afraid. We normally have a weapon shop and an armor shop but the owners have been kidnapped!\nI pray they come home soon.\nUntil then, I have a few pieces of equipment");
-        else Utilities.ColourText(Colour.SPEAK, "'Well, hello there! Are you here to buy something? Check back frequently, I'm always getting new items!");
-        Console.Write(Colour.HEALTH + "\n\n[P]" + Colour.RESET);
-        Console.Write("otions");
-        if (p.craft == false && Marburgh.Program.tutorial)
+        if (Marburgh.Program.tutorial == false)
         {
-            Console.Write(Colour.ENHANCEMENT + "     [E]" + Colour.RESET);
-            Console.Write("nhancement Machine");
+            UI.General(new List<int> { 0, 2, 0, 1, 1, 1, 1}, new List<string>
+            {
+                "You enter a cluttered shop. There are bubbling potions everywhere.",
+                Colour.NAME, Colour.CLASS, "", "Elya ", "the ", "elf ", "looks at you and smiles",
+                "",
+                Colour.SPEAK, "","'Well, hello there. Are you here to buy something?", "",
+                Colour.SPEAK, "","There's not much in town, i'm afraid.","",
+                Colour.SPEAK,"","We normally have a weapon shop and an armor shop but the owners have been kidnapped!","",
+                Colour.SPEAK,"", "I pray they come home soon. Until then, I have a few pieces of equipment'",""
+            }, 
+            itemShopOptionList1, itemShopOptionList2, itemShopOptionButton1, itemShopOptionButton2);
         }
-        if (Marburgh.Program.tutorial == false) Console.WriteLine("\n[B]uy        [S]ell");
-        Console.WriteLine("\n\n[R]eturn to town");
-        Utilities.EmbedColourText(Colour.GOLD, "\nYou have ", $"{p.gold}", " gold:\n\n");
+        else
+        {
+            UI.General(new List<int> { 0, 2, 1 }, new List<string>
+            {
+                "You enter a cluttered shop. There are bubbling potions everywhere.",
+                Colour.NAME, Colour.CLASS, "", "Elya ", "the ", "elf ", "looks at you and smiles",
+                Colour.SPEAK, "","'Well, hello there! Are you here to buy something? Check back frequently, I'm always getting new items!",""
+            }, 
+            itemShopOptionList1, itemShopOptionList2, itemShopOptionButton1, itemShopOptionButton2);
+        }
         string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();        
         if (choice == "b" && Marburgh.Program.tutorial == false) ShopBuy(Tutorial, p);
         if (choice == "s" && Marburgh.Program.tutorial == false) ShopSell(Tutorial, p);
@@ -180,24 +195,47 @@ public class Shop
         if (choice == "e" && Marburgh.Program.tutorial)
         {
             Console.Clear();
-            Utilities.EmbedColourText(Colour.SPEAK, Colour.RAREDROP, Colour.SPEAK, Colour.GOLD, Colour.SPEAK, "", "Ah yes... A very rare thing indeed. \nA", "", " crafting machine", "", " can allow you to use the scraps of " +
-                "monsters to build your own items, including weapons and armor!\nAll yours for the reasonable price of ", "", "300", "", " gold\nWould you like to buy it?", "");
-            Console.WriteLine("\n[Y]es     [N]o");
+
+            UI.General(new List<int> { 0, 2, 1, 0, 0, 0 }, new List<string>
+            {
+                "A very rare thing indeed",
+                Colour.ENHANCEMENT,Colour.ENHANCEMENT, "An", " enhancement machine", " can allow you to ","enhance ", "your gear",
+                Colour.GOLD, "All yours for the reasonable price of ", "300 ", "gold",
+                "Would you like to buy it?",
+                "",
+                "[Y]es     [N]o"
+            }, 
+            itemShopOptionList1, itemShopOptionList2, itemShopOptionButton1, itemShopOptionButton2);
+
             string confirm = Console.ReadKey(true).KeyChar.ToString().ToLower();
             if (confirm == "y")
             {
                 if (p.gold >= 300)
                 {
-                    Utilities.ColourText(Colour.SPEAK, "\n\nWonderful!");
-                    Utilities.EmbedColourText(Colour.SPEAK, Colour.RAREDROP, "\n", "Elya takes your money and gives you the ", "", "crafting machine.", "");
+                    UI.General(new List<int> { 1, 2, 0, 0}, new List<string>
+                    {
+                        Colour.SPEAK,"","'Wonderful!'","",
+                        Colour.ENHANCEMENT,Colour.ENHANCEMENT, "","Elya ", "takes your money and gives you the ", "crafting machine.", "",
+                        "",
+                        "Press any key to continue"
+                    },
+                    itemShopOptionList1, itemShopOptionList2, itemShopOptionButton1, itemShopOptionButton2);
+                    Console.ReadKey(true);
+
                     p.gold -= 300;
-                    p.craft = true;
-                    Utilities.Keypress();
+                    p.craft = true;                    
                     ItemShop(p);
                 }
             }
-            Utilities.ColourText(Colour.SPEAK, "\n\nCome back when you're serious!");
-            Utilities.Keypress();
+
+            UI.General(new List<int> { 1, 0, 0 }, new List<string>
+            {
+                Colour.SPEAK,"","'Come back when you're serious!'","",
+                "",
+                "Press any key to continue"
+            },
+            itemShopOptionList1, itemShopOptionList2, itemShopOptionButton1, itemShopOptionButton2);
+            Console.ReadKey(true);
         }
         if (choice == "p")
         {
@@ -207,22 +245,56 @@ public class Shop
             do
             {
                 Console.Clear();
-                Utilities.ColourText(Colour.SPEAK, "'Excellent! how many would you like to buy? They are 100 gold apiece and you can carry a maximum of ");
-                Utilities.EmbedColourText(Colour.GOLD, Colour.SPEAK, "", $"{amount}", "", ".'", "");
-                Utilities.EmbedColourText(Colour.SPEAK, Colour.HEALTH, Colour.SPEAK, "\n\n", "You can buy ", "", $"{buymax} ", "", "potions\n", "\n[0] Return\n"+Colour.HEALTH);
+                UI.General(new List<int> { 0, 2, 0, 0 }, new List<string>
+            {
+                "How many would you like to buy?",
+                Colour.GOLD, Colour.HEALTH, "They are ","100 ", "gold apiece and you have space for ", $"{buymax} ", "more potions",
+                "",
+                "[0] Return\n"
+            },
+            itemShopOptionList1, itemShopOptionList2, itemShopOptionButton1, itemShopOptionButton2);
+            Console.SetCursorPosition(58, 14);
+
             } while (!int.TryParse(Console.ReadLine(), out buyChoice));
-            Console.Write(Colour.RESET);
+
             if (buyChoice == 0) ItemShop(p);
-            else if (buyChoice > buymax) Utilities.ColourText(Colour.SPEAK, "\nYou have too many potions!");
-            else if (p.gold < buyChoice * 100) Utilities.ColourText(Colour.SPEAK, "\n'I'm sorry, it doesn't look like you can afford that'");
+            else if (buyChoice > buymax)
+            {
+                UI.General(new List<int> { 1, 0, 0 }, new List<string>
+                {
+                    Colour.SPEAK,"","'You have too many potions!'","",
+                    "",
+                    "Press any key to continue"
+                },
+                itemShopOptionList1, itemShopOptionList2, itemShopOptionButton1, itemShopOptionButton2);
+                Console.ReadKey(true);
+            }
+            else if (p.gold < buyChoice * 100)
+            {
+                UI.General(new List<int> { 1, 0, 0 }, new List<string>
+                {
+                    Colour.SPEAK,"","'I'm sorry, it doesn't look like you can afford that'","",
+                    "",
+                    "Press any key to continue"
+                },
+                itemShopOptionList1, itemShopOptionList2, itemShopOptionButton1, itemShopOptionButton2);
+                Console.ReadKey(true);
+            }
             else
             {
-                Utilities.ColourText(Colour.SPEAK, "'A pleasure doing business with you!'");
-                Utilities.EmbedColourText(Colour.GOLD, Colour.HEALTH, "You give the elf ", $"{buyChoice * 100}", " gold and receive ", $"{buyChoice}", " potions");
+                UI.General(new List<int> { 1, 0, 2, 0, 0 }, new List<string>
+                {
+                    Colour.SPEAK,"","'A pleasure doing business with you!'","",
+                    "",
+                    Colour.GOLD,Colour.HEALTH,"You give the elf ", $"{buyChoice * 100}", " gold and receive ", $"{buyChoice}", " potions",
+                    "",
+                    "Press any key to continue"
+                },
+                itemShopOptionList1, itemShopOptionList2, itemShopOptionButton1, itemShopOptionButton2);
+                Console.ReadKey(true);
                 p.gold -= buyChoice * 100;
                 p.potions += buyChoice;
             }
-            Utilities.Keypress();
         }        
         ItemShop(p);
     }

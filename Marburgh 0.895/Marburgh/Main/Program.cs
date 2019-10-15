@@ -3,13 +3,21 @@ using System.Threading;
 using System.Collections.Generic;
 
 namespace Marburgh
-{    
+{
     class Program
     {
         public static bool bank;
         public static int bankGold = 0;
         public static bool tutorial;
-        public static Dungeon d = new Dungeon("", 1, "", 0, 0, Room.StarterGenericRoomList, Room.StarterGenericRoomList, Room.StarterGenericRoomList, Boss.BossList[0], false,  1, false, Shell.StarterDungeonShell,0);
+        public static List<string> adventureButton = new List<string> { "D" };
+        public static List<string> adventureList = new List<string> { "ungeon" };
+        public static List<string> shopButton = new List<string> { "I" };
+        public static List<string> shopList = new List<string> { "tem Shop" };
+        public static List<string> serviceButton = new List<string> { "T", "L" };
+        public static List<string> serviceList = new List<string> { "avern", "evel Master" };
+        public static List<string> otherButton = new List<string> { "Y", "O", "", "?" };
+        public static List<string> otherList = new List<string> { "our House", "ther Places", "", "Help" };
+    public static Dungeon d = new Dungeon("", 1, "", 0, 0, Room.StarterGenericRoomList, Room.StarterGenericRoomList, Room.StarterGenericRoomList, Boss.BossList[0], false,  1, false, Shell.StarterDungeonShell,0);
         //STARTS GAME
         static void Main(string[] args)
         {
@@ -61,14 +69,7 @@ namespace Marburgh
         {
             for (int i = 0; i < Time.Events.Count; i++) {if (Time.Events[i].name == "Bank Construction" && Time.Events[i].trigger && Time.Events[i].active) bank = true;}
             Console.Clear();
-            Utilities.ColourText(Colour.SPEAK, "You are in the town of Marburgh. It is a small town, but is clearly growing. Who knows what will be here in a month?\n\n");
-            if (tutorial) Console.WriteLine(        "[W]eapon shop            [A]rmor shop            [I]tem shop          [D]ungeon");
-            else Console.WriteLine(                 "[I]tem shop              [D]ungeon");
-            if (tutorial && bank) Console.WriteLine("[T]avern                 [Y]our house            [B]ank               [?]Help          ");
-            else Console.WriteLine(                 "[T]avern                 [Y]our house            [?]Help    ");
-            Console.WriteLine(                      "[C]haracter              [L]evel Master          [O]ther Places       [Q]uit                 ");      
-            Utilities.ColourText(Colour.SPEAK, "\n\nWhat would you like to do?\n\n");
-            Utilities.EmbedColourText(Colour.TIME, Colour.TIME, Colour.TIME, Colour.TIME, "It is day ",$"{Time.day}",", the ",$"{Time.weeks[Time.week]}", " week of ",$"{Time.months[Time.month]}",", ",$"{Time.year}","\n\n");
+            UI.Town(new string[] { "You are in the town of Marburgh", "It is a small town, but is clearly growing", "Who knows what will be here in a month?" }, adventureList, shopList,  serviceList, otherList, adventureButton, shopButton, serviceButton, otherButton);
             string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();
             if (choice == "w" && tutorial) Shop.GameShop(Shop.WeaponShop, Create.p);
             else if (choice == "a" && tutorial) Shop.GameShop(Shop.ArmorShop, Create.p);
@@ -81,11 +82,13 @@ namespace Marburgh
             else if (choice == "y") House.YourHouse(Create.p);
             else if (choice == "b" && tutorial && bank) Bank.GameBank(Create.p);
             else if (choice == "q") Utilities.Quit();
-            else if (choice == "n") UI.Town(new string[] { "You are in the town of Marburgh", "It is a small town, but is clearly growing", "Who knows what will be here in a month?" }, new string[] { "ungeon" }, new string[] { "eapon Shop", "rmor Shop", "tem Shop" }, new string[] { "avern", "ank", "evel Master" }, new string[] {"our House", "ther Places", "", "Help" }, new string[] { "D" }, new string[] { "W", "A", "I" }, new string[] { "T", "B", "L"}, new string[] { "Y", "O", "", "?" });
             else if (choice == "x")
             {
                 Create.p.xp += 30;
-                Create.p.gold += 500;                
+                Create.p.gold += 500;
+                tutorial = true;
+                Shop.itemShopOptionButton1.Add(Colour.ENHANCEMENT + "E" + Colour.RESET);
+                Shop.itemShopOptionList1.Add("nhancement Machine");
             }
             else if (choice == "o") OtherPlaces.Other(Create.p);
             GameTown();

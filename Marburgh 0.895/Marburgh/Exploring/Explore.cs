@@ -15,13 +15,12 @@ class Explore
         //If no, go home
         if (canExplore == false)
         {
-            Utilities.ColourText(Colour.SPEAK, "You are exhausted. Go to bed and come back tomorrow");
-            Utilities.Keypress();
+            UI.Town(new string[] { "You are exhausted", "You should go to bed", "", "Press any key to continue" }, Marburgh.Program.adventureList, Marburgh.Program.shopList, Marburgh.Program.serviceList, Marburgh.Program.otherList, Marburgh.Program.adventureButton, Marburgh.Program.shopButton, Marburgh.Program.serviceButton, Marburgh.Program.otherButton);
+            Console.ReadKey(true);
             Marburgh.Program.GameTown();
         }
         //Warning so you don't use it then leave right away
-        Utilities.ColourText(Colour.SPEAK, "You may only go exploring once a day. Would you like to go now?");
-        Console.WriteLine("\n\n[Y]es      [N]o");
+        UI.Town(new string[] { "You may only go exploring once a day. Would you like to go now?", "", "[Y]es      [N]o" }, Marburgh.Program.adventureList, Marburgh.Program.shopList, Marburgh.Program.serviceList, Marburgh.Program.otherList, Marburgh.Program.adventureButton, Marburgh.Program.shopButton, Marburgh.Program.serviceButton, Marburgh.Program.otherButton);
         string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();
         if (choice == "y")
         {
