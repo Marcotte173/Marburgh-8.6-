@@ -1,0 +1,11 @@
+C:\Users\travi\Desktop\Marburgh 0.89\Marburgh\bin\Debug\Marburgh.exe.config
+C:\Users\travi\Desktop\Marburgh 0.89\Marburgh\bin\Debug\Marburgh.exe.manifest
+C:\Users\travi\Desktop\Marburgh 0.89\Marburgh\bin\Debug\Marburgh.application
+C:\Users\travi\Desktop\Marburgh 0.89\Marburgh\bin\Debug\Marburgh.exe
+C:\Users\travi\Desktop\Marburgh 0.89\Marburgh\bin\Debug\Marburgh.pdb
+C:\Users\travi\Desktop\Marburgh 0.89\Marburgh\obj\Debug\Marburgh_0.89.csprojAssemblyReference.cache
+C:\Users\travi\Desktop\Marburgh 0.89\Marburgh\obj\Debug\Marburgh_0.89.csproj.CoreCompileInputs.cache
+C:\Users\travi\Desktop\Marburgh 0.89\Marburgh\obj\Debug\Marburgh.exe.manifest
+C:\Users\travi\Desktop\Marburgh 0.89\Marburgh\obj\Debug\Marburgh.application
+C:\Users\travi\Desktop\Marburgh 0.89\Marburgh\obj\Debug\Marburgh.exe
+C:\Users\travi\Desktop\Marburgh 0.89\Marburgh\obj\Debug\Marburgh.pdb
